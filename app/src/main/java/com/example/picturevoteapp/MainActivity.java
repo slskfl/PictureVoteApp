@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     ImageView[] imPic=new ImageView[9];
-    Button btnResult;
+    Button btnResult, btnSort;
     int[] imPicId={R.id.imgP1, R.id.imgP2, R.id.imgP3, R.id.imgP4, R.id.imgP5, R.id.imgP6,
             R.id.imgP7, R.id.imgP8, R.id.imgP9};
     String[] imgNames={"독서하는 소녀", "꽃장식 모자 소녀", "부채를 든 소녀", "아래느낌 단 베르앙",
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         bar.setTitle("명화 선호도 투표");
         bar.setDisplayShowHomeEnabled(true);
         btnResult=findViewById(R.id.btnResult);
+        btnSort=findViewById(R.id.btnSort);
 
         for(int i=0; i<imPicId.length; i++){
             imPic[i]=findViewById(imPicId[i]);
@@ -51,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("ImageName", imgNames);
+                intent.putExtra("VoteCount", voteCount);
+                startActivity(intent);
+            }
+        });
+
+        btnSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), SortActivity.class);
                 intent.putExtra("ImageName", imgNames);
                 intent.putExtra("VoteCount", voteCount);
                 startActivity(intent);
